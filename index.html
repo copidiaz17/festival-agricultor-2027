@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>1er Festival del Agricultor · Fernández 2027</title>
-<meta name="description" content="Sábado 9 y domingo 10 de enero de 2027 en el Club Independiente de Fernández, Santiago del Estero. Raly Barrionuevo, Orellana Lucca, Alejandro Véliz, Planeador V, Los Bonys y más. Entradas online muy pronto.">
+<meta name="description" content="Sábado 9 y domingo 10 de enero de 2027 en el Club Independiente de Fernández, Santiago del Estero. Raly Barrionuevo, Orellana Lucca, Dúo Coplanacu, Las Sachaguitarras Atamisqueñas, Marcelo Toledo, Demi Carabajal, Alejandro Véliz, Planeador V, Los Bonys y más. Entradas online muy pronto.">
 <!-- Vista previa: sacar esta línea el día que se lance la venta. -->
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#070a1c">
@@ -17,7 +17,7 @@
 <meta property="og:locale" content="es_AR">
 <meta property="og:site_name" content="Festival del Agricultor">
 <meta property="og:title" content="1er Festival del Agricultor · Fernández · 9 y 10 de enero 2027">
-<meta property="og:description" content="Dos noches en el Club Independiente de Fernández. Raly Barrionuevo, Orellana Lucca y muchos más. Entradas online muy pronto.">
+<meta property="og:description" content="Dos noches en el Club Independiente de Fernández. Raly Barrionuevo, Orellana Lucca, Dúo Coplanacu y muchos más. Entradas online muy pronto.">
 <meta property="og:image" content="https://copidiaz17.github.io/festival-agricultor-2027/assets/compartir.jpg">
 <meta property="og:url" content="https://copidiaz17.github.io/festival-agricultor-2027/">
 <meta property="og:image:width" content="1200">
@@ -171,6 +171,7 @@ body.menu-abierto{overflow:hidden;}
 .nombres i{font-style:normal;color:var(--oro);padding:0 .35em;}
 /* Cada nombre va entero: si no entra, baja el nombre completo (nunca "FRANCO / ESCOBEDO"). */
 .nombres span{white-space:nowrap;}
+.nombres p{text-wrap:balance;}
 .nombres .l1{font-family:var(--f-display);font-size:clamp(19px,5.6vw,30px);line-height:1.15;letter-spacing:.02em;}
 .nombres .l2{font-weight:800;font-size:clamp(9.5px,2.55vw,14px);letter-spacing:.04em;line-height:1.75;}
 .nombres .l3{font-weight:700;font-size:clamp(8.5px,2.3vw,12px);letter-spacing:.06em;opacity:.85;line-height:1.8;}
@@ -329,7 +330,9 @@ html.quieto .haces i,html.quieto .espigas g{animation-play-state:paused;}
 /* El tamaño va en la fila: así el ✦ separador se escala con los nombres de su fila. */
 .poster .fila{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;line-height:1.04;}
 .poster .fila + .fila{margin-top:clamp(6px,1.2vw,14px);}
-.poster .item{display:inline-flex;align-items:center;white-space:nowrap;}
+.poster .item{display:inline-flex;align-items:center;white-space:nowrap;max-width:100%;}
+/* Un nombre más ancho que el póster (Las Sachaguitarras Atamisqueñas en un celular chico) se parte en dos renglones. */
+.poster .item .art-n{white-space:normal;text-wrap:balance;}
 .poster .sep{color:var(--oro);font-size:.4em;padding:0 .45em;line-height:1;}
 .poster .art-n{font-family:var(--f-display);font-weight:400;font-size:1em;text-transform:uppercase;line-height:1.04;letter-spacing:.01em;
   background:none;border:none;color:inherit;cursor:default;padding:0;text-align:center;}
@@ -384,7 +387,7 @@ html.quieto .haces i,html.quieto .espigas g{animation-play-state:paused;}
 .ficha-texto{padding:20px 24px 24px;background:linear-gradient(180deg,rgba(7,10,28,.0),rgba(7,10,28,.85) 30%);margin-top:-40px;position:relative;}
 .ficha-texto .gen{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:11px;font-weight:800;letter-spacing:.3em;text-transform:uppercase;color:var(--oro);}
 .ficha-texto .gen i{font-style:normal;letter-spacing:.14em;font-size:10px;padding:4px 9px;border-radius:5px;background:var(--verde);color:var(--crema);}
-.ficha-texto h3{font-family:var(--f-display);font-weight:400;text-transform:uppercase;font-size:clamp(34px,9vw,46px);line-height:1;margin-top:4px;}
+.ficha-texto h3{font-family:var(--f-display);font-weight:400;text-transform:uppercase;font-size:clamp(34px,9vw,46px);line-height:1.08;margin-top:4px;}
 .ficha-texto p{margin-top:8px;color:rgba(247,236,214,.8);font-size:14.5px;}
 .ficha-texto .btn{margin-top:16px;width:100%;}
 .ficha-cerrar{position:absolute;right:12px;top:12px;z-index:2;width:42px;height:42px;border-radius:50%;border:none;cursor:pointer;font-size:24px;line-height:1;
@@ -619,11 +622,12 @@ footer{background:#04060f;padding:56px 0 calc(110px + env(safe-area-inset-bottom
 
     <div class="hero-pie">
       <div class="nombres" aria-label="Artistas confirmados">
-        <p class="l1"><span>Raly Barrionuevo</span><i>✦</i><span>Orellana Lucca</span></p>
-        <p class="l2"><span>Alejandro Véliz</span><i>✦</i><span>Franco Escobedo</span><i>✦</i><span>Planeador V</span></p>
-        <p class="l2"><span>Los Bonys</span><i>✦</i><span>Pochi Chávez</span><i>✦</i><span>Claudio Acosta</span></p>
-        <p class="l2"><span>Ricardo Sosa y La Ranchada</span><i>✦</i><span>Recuerdo Los Golpes</span></p>
-        <p class="l3"><span>DJ Leo Lencina</span><i>✦</i><span>Artistas y academias de Fernández</span></p>
+        <p class="l1"><span>Raly Barrionuevo<i>✦</i></span><wbr><span>Orellana Lucca<i>✦</i></span><wbr><span>Dúo Coplanacu</span></p>
+        <p class="l2"><span>Marcelo Toledo<i>✦</i></span><wbr><span>Demi Carabajal<i>✦</i></span><wbr><span>Las Sachaguitarras Atamisqueñas</span></p>
+        <p class="l2"><span>Alejandro Véliz<i>✦</i></span><wbr><span>Franco Escobedo<i>✦</i></span><wbr><span>Planeador V</span></p>
+        <p class="l2"><span>Los Bonys<i>✦</i></span><wbr><span>Pochi Chávez<i>✦</i></span><wbr><span>Claudio Acosta<i>✦</i></span><wbr><span>Nolberto Al K La</span></p>
+        <p class="l2"><span>Ricardo Sosa y La Ranchada<i>✦</i></span><wbr><span>Recuerdo Los Golpes</span></p>
+        <p class="l3"><span>DJ Leo Lencina<i>✦</i></span><wbr><span>Artistas y academias de Fernández</span></p>
       </div>
       <p class="hero-fecha">Sábado 9 y domingo 10 de enero 2027</p>
       <p class="hero-lugar">Club Independiente · Fernández</p>
@@ -708,14 +712,14 @@ footer{background:#04060f;padding:56px 0 calc(110px + env(safe-area-inset-bottom
   <div class="contenedor">
     <p class="kicker revelar"><b>Lote 04</b>Vuelve el gran festival</p>
     <h2 class="titulo" id="titulo-historia">Fernández vuelve a tener <em>su gran festival</em></h2>
-    <p class="texto revelar">Después de más de 11 años, Fernández vuelve a tener un gran festival. La <b>Capital del Agro</b> de
+    <p class="texto revelar">Después de más de 20 años, Fernández vuelve a tener un gran festival. La <b>Capital del Agro</b> de
       Santiago del Estero abre la cancha del Club Independiente para dos noches de música, con artistas de primera línea y los de acá.</p>
     <p class="texto revelar">No es una fiesta solo para Fernández: es un acontecimiento para todas las localidades vecinas, para
       <b>La Banda</b> y para <b>Santiago capital</b>. Familias, amigos y gente de toda la región vuelven a encontrarse frente a un escenario.</p>
     <p class="texto revelar">Y es también un empuje para la ciudad: durante las dos noches trabajan los comercios, los puestos de comida,
       los artesanos y los productores de la zona. Un festival que celebra a la gente que trabaja la tierra, organizado por gente de Fernández.</p>
     <div class="cifras">
-      <div class="cifra revelar"><b>+11</b><span>años esperando un gran festival</span></div>
+      <div class="cifra revelar"><b>+20</b><span>años esperando un gran festival</span></div>
       <div class="cifra revelar" style="--d:80ms"><b>1ª</b><span>edición del Festival del Agricultor</span></div>
       <div class="cifra revelar" style="--d:160ms"><b>2</b><span>noches de enero</span></div>
       <div class="cifra revelar" style="--d:240ms"><b id="cifra-artistas">22</b><span>artistas en el escenario</span></div>
@@ -773,7 +777,7 @@ footer{background:#04060f;padding:56px 0 calc(110px + env(safe-area-inset-bottom
       <div class="info-llegar">
         <div class="info-item revelar">
           <h3>Dónde</h3>
-          <p><b>Club Independiente de Fernández</b>Estadio Municipal Luis Adolfo Galván<br>Independencia y 20 de Junio · Fernández, Santiago del Estero</p>
+          <p><b>Club Independiente de Fernández</b>Estadio Luis Adolfo Galván<br>Independencia y 20 de Junio · Fernández, Santiago del Estero</p>
           <a class="btn btn-oro" href="https://www.google.com/maps/dir/?api=1&amp;destination=-27.92782,-63.89945" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>
             Cómo llegar con Google Maps</a>
@@ -803,7 +807,9 @@ footer{background:#04060f;padding:56px 0 calc(110px + env(safe-area-inset-bottom
       <div class="pie-produce"><span>Produce</span><img src="assets/logo-mb-280.webp" width="280" height="280" alt="MB Producción Integral de Eventos" loading="lazy"></div>
     </div>
     <p class="creditos">
-      Foto Raly Barrionuevo: Abelrom, CC BY-SA 3.0. Resto de las fotos de artistas: prensa de cada artista.
+      Foto Raly Barrionuevo: Abelrom, CC BY-SA 3.0. Foto Demi Carabajal: TitiNicola, CC BY-SA 4.0 (recortada).
+      Fotos de prensa: Dúo Coplanacu, La Voz (Jesús María 2026); Marcelo Toledo, Revista La Columna; Las Sachaguitarras Atamisqueñas, Info del Estero;
+      Nolberto Al K La, videoclip "Te extraño amor". Resto de las fotos de artistas: prensa de cada artista.
       Fondos del trigal y la noche de festival en la cancha: recreaciones generadas con IA. Imagen satelital: Esri / Maxar.
     </p>
   </div>
@@ -856,13 +862,18 @@ const FESTIVAL = {
     pochi:     { nombre: 'Pochi Chávez', genero: 'Humor', foto: true },
     acosta:    { nombre: 'Claudio Acosta', genero: 'Folklore', foto: true },
     ranchada:  { nombre: 'Ricardo Sosa y La Ranchada', genero: 'Chamamé', foto: true },
+    coplanacu: { nombre: 'Dúo Coplanacu', genero: 'Folklore', foto: true, detalle: 'Roberto Cantos y Julio Paz' },
+    sachas:    { nombre: 'Las Sachaguitarras Atamisqueñas', genero: 'Folklore', foto: true, detalle: 'Desde Atamisqui, con sus sachaguitarras y sachaviolines' },
+    toledo:    { nombre: 'Marcelo Toledo', genero: 'Folklore', foto: true },
+    demi:      { nombre: 'Demi Carabajal', genero: 'Folklore', foto: true },
+    alkala:    { nombre: 'Nolberto Al K La', genero: 'Merengue y cuarteto', foto: true, fondo: 'Al K La' },
     golpes:    { nombre: 'Recuerdo Los Golpes', genero: 'Tributo' },
     lencina:   { nombre: 'DJ Leo Lencina', genero: 'DJ' },
     locales:   { nombre: 'Artistas y academias de Fernández', local: true },
   },
   // Filas del póster, de mayor a menor (igual que el flyer).
-  poster: [['raly', 'orellana'], ['veliz', 'escobedo', 'planeador'], ['bonys', 'pochi', 'acosta'],
-           ['ranchada', 'golpes'], ['lencina', 'locales']],
+  poster: [['raly', 'orellana', 'coplanacu'], ['toledo', 'demi', 'sachas'], ['veliz', 'escobedo', 'planeador'],
+           ['bonys', 'pochi', 'acosta', 'alkala'], ['ranchada', 'golpes'], ['lencina', 'locales']],
   menoresGratisHasta: null,   // edad, cuando se confirme
   puertas: null,              // por ejemplo '20 h'
   whatsappPuestos: null,      // número con código de país, sin espacios: '549385...'
@@ -1019,12 +1030,12 @@ addEventListener('keydown', e => { if (e.key === 'Escape') menu(false); });
 
 /* ── Cartelera: póster tipográfico, foto al pasar el mouse y ficha al tocar ── */
 (() => {
-  const clases = ['f1', 'f2', 'f3', 'f3', 'f4'];
+  const clases = ['f1', 'f2', 'f2', 'f3', 'f3'];
   let color = 0;   // las filas del medio alternan crema, maíz y hoja
-  $('#poster').innerHTML = FESTIVAL.poster.map((fila, i) => `<div class="fila ${clases[i] || 'f4'} revelar" style="--d:${i * 80}ms">${
+  $('#poster').innerHTML = FESTIVAL.poster.map((fila, i) => `<div class="fila ${i === FESTIVAL.poster.length - 1 ? 'f4' : clases[i] || 'f3'} revelar" style="--d:${i * 80}ms">${
     fila.map(k => {
       const a = FESTIVAL.artistas[k];
-      const c = i > 0 && i < 4 ? ` c${color++ % 3}` : '';
+      const c = i > 0 && i < FESTIVAL.poster.length - 1 ? ` c${color++ % 3}` : '';
       const nombre = a.foto
         ? `<button type="button" class="art-n${c}" data-artista="${k}" aria-haspopup="dialog">${escapar(a.nombre)}</button>`
         : a.local ? `<a class="art-n${c}" href="#locales">${escapar(a.nombre)}</a>`
@@ -1055,7 +1066,7 @@ addEventListener('keydown', e => { if (e.key === 'Escape') menu(false); });
     const b = e.target.closest('[data-artista]'); if (!b) return;
     const k = b.dataset.artista, a = FESTIVAL.artistas[k], noches = nochesDe(k);
     $('#ficha-foto').src = `assets/artistas/${k}.webp`; $('#ficha-foto').alt = a.nombre;
-    $('#ficha-fondo').textContent = a.nombre.split(' ').slice(-1)[0];
+    $('#ficha-fondo').textContent = a.fondo || a.nombre.split(' ').slice(-1)[0];   // la palabra grande de atrás
     $('#ficha-gen').innerHTML = `<i>Confirmado</i>${escapar(a.genero || '')}`;
     $('#ficha-nombre').textContent = a.nombre;
     $('#ficha-noche').textContent = (a.detalle ? a.detalle + '. ' : '') + (noches.length
@@ -1131,7 +1142,8 @@ addEventListener('keydown', e => { if (e.key === 'Escape') menu(false); });
   });
   // Sin emojis: por enlace de WhatsApp llegan rotos.
   const texto = '1er Festival del Agricultor en Fernandez: sabado 9 y domingo 10 de enero en el Club Independiente. '
-    + 'Raly Barrionuevo, Orellana Lucca, Alejandro Veliz, Planeador V, Los Bonys y muchos mas. ' + url;
+    + 'Raly Barrionuevo, Orellana Lucca, Duo Coplanacu, Las Sachaguitarras Atamisquenas, Marcelo Toledo, Demi Carabajal, '
+    + 'Alejandro Veliz, Planeador V, Los Bonys y muchos mas. ' + url;
   $('#btn-compartir').href = 'https://wa.me/?text=' + encodeURIComponent(texto);
   if (FESTIVAL.whatsappPuestos) {
     $('#anotate').hidden = false;
