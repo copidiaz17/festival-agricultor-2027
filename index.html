@@ -624,7 +624,7 @@ footer{background:#04060f;padding:56px 0 calc(110px + env(safe-area-inset-bottom
       <div class="nombres" aria-label="Artistas confirmados">
         <p class="l1"><span>Raly Barrionuevo<i>✦</i></span><wbr><span>Orellana Lucca<i>✦</i></span><wbr><span>Dúo Coplanacu</span></p>
         <p class="l2"><span>Marcelo Toledo<i>✦</i></span><wbr><span>Demi Carabajal<i>✦</i></span><wbr><span>Las Sachaguitarras Atamisqueñas</span></p>
-        <p class="l2"><span>Alejandro Véliz<i>✦</i></span><wbr><span>Franco Escobedo<i>✦</i></span><wbr><span>Planeador V</span></p>
+        <p class="l2"><span>Alejandro Véliz<i>✦</i></span><wbr><span>Franco Escobedo<i>✦</i></span><wbr><span>Planeador V<i>✦</i></span><wbr><span>JLS Ternura</span></p>
         <p class="l2"><span>Los Bonys<i>✦</i></span><wbr><span>Pochi Chávez<i>✦</i></span><wbr><span>Claudio Acosta<i>✦</i></span><wbr><span>Nolberto Al K La</span></p>
         <p class="l2"><span>Ricardo Sosa y La Ranchada<i>✦</i></span><wbr><span>Recuerdo Los Golpes</span></p>
         <p class="l3"><span>DJ Leo Lencina<i>✦</i></span><wbr><span>Artistas y academias de Fernández</span></p>
@@ -807,8 +807,8 @@ footer{background:#04060f;padding:56px 0 calc(110px + env(safe-area-inset-bottom
       <div class="pie-produce"><span>Produce</span><img src="assets/logo-mb-280.webp" width="280" height="280" alt="MB Producción Integral de Eventos" loading="lazy"></div>
     </div>
     <p class="creditos">
-      Foto Raly Barrionuevo: Abelrom, CC BY-SA 3.0.
-      Fotos de prensa: Dúo Coplanacu, La Voz (Jesús María 2026); Demi Carabajal, Info del Estero (2026); Marcelo Toledo, Revista La Columna; Las Sachaguitarras Atamisqueñas, Sur Santiagueño (52° aniversario, 2023);
+      Foto Raly Barrionuevo: Abelrom, CC BY-SA 3.0. Foto Marcelo Toledo: Lu Álvarez Quiroga.
+      Fotos de prensa: Dúo Coplanacu, La Voz (Jesús María 2026); Las Sachaguitarras Atamisqueñas, Sur Santiagueño (52° aniversario, 2023);
       Nolberto Al K La, videoclip "Te extraño amor". Resto de las fotos de artistas: prensa de cada artista.
       Fondos del trigal y la noche de festival en la cancha: recreaciones generadas con IA. Imagen satelital: Esri / Maxar.
     </p>
@@ -867,12 +867,13 @@ const FESTIVAL = {
     toledo:    { nombre: 'Marcelo Toledo', genero: 'Folklore', foto: true },
     demi:      { nombre: 'Demi Carabajal', genero: 'Folklore', foto: true },
     alkala:    { nombre: 'Nolberto Al K La', genero: 'Merengue y cuarteto', foto: true, fondo: 'Al K La' },
+    ternura:   { nombre: 'JLS Ternura', genero: '', foto: true },
     golpes:    { nombre: 'Recuerdo Los Golpes', genero: 'Tributo' },
     lencina:   { nombre: 'DJ Leo Lencina', genero: 'DJ' },
     locales:   { nombre: 'Artistas y academias de Fernández', local: true },
   },
   // Filas del póster, de mayor a menor (igual que el flyer).
-  poster: [['raly', 'orellana', 'coplanacu'], ['toledo', 'demi', 'sachas'], ['veliz', 'escobedo', 'planeador'],
+  poster: [['raly', 'orellana', 'coplanacu'], ['toledo', 'demi', 'sachas'], ['veliz', 'escobedo', 'planeador', 'ternura'],
            ['bonys', 'pochi', 'acosta', 'alkala'], ['ranchada', 'golpes'], ['lencina', 'locales']],
   menoresGratisHasta: null,   // edad, cuando se confirme
   puertas: null,              // por ejemplo '20 h'
@@ -888,6 +889,10 @@ const FESTIVAL = {
     { clave: 'vozdelmonte', nombre: 'La Voz del Monte', detalle: 'Sachapas Simin' },
     { clave: 'gimenez', nombre: 'Los Hermanitos Giménez' },
     { clave: 'siete', nombre: 'Los Siete del Chamamé' },
+    { clave: 'talentosos', nombre: 'Los Talentosos del Chamamé' },
+    { clave: 'zagales', nombre: 'Zagales', detalle: 'Folclore del corazón' },
+    { clave: 'rodri', nombre: 'Rodri Salvatierra' },
+    { clave: 'cristian', nombre: 'Cristian Heredia' },
     { clave: 'leo', nombre: 'Leo Lencina', detalle: 'DJ' },
     { clave: 'rocky', nombre: 'DJ Rocky' },
     { clave: 'adrian', nombre: 'DJ Adrián' },
