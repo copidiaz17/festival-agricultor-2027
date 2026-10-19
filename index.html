@@ -270,6 +270,7 @@ html.quieto .haces i,html.quieto .espigas g{animation-play-state:paused;}
   -webkit-mask-image:linear-gradient(0deg,transparent 0%,#000 14%);mask-image:linear-gradient(0deg,transparent 0%,#000 14%);}
 .local .tarima{position:absolute;left:0;right:0;bottom:0;height:26%;padding:14px 16px 0;text-align:center;
   background:linear-gradient(180deg,rgba(5,7,22,.75),#05060f 40%);box-shadow:0 -1px 0 rgba(244,194,91,.45);}
+.local img.sin-foto{max-height:52%;opacity:.55;filter:grayscale(.3);}
 .local .tarima small{display:block;font-size:10px;font-weight:800;letter-spacing:.3em;text-transform:uppercase;color:var(--oro);}
 .local .tarima b{display:block;font-family:var(--f-display);font-weight:400;text-transform:uppercase;line-height:1.02;letter-spacing:.01em;
   font-size:clamp(22px,6.4vw,30px);margin-top:4px;background:var(--oro-degrade);-webkit-background-clip:text;background-clip:text;color:transparent;
@@ -354,6 +355,16 @@ html.quieto .haces i,html.quieto .espigas g{animation-play-state:paused;}
 .poster .f4 .art-n{font-family:var(--f-texto);font-weight:800;letter-spacing:.14em;color:rgba(247,236,214,.75);}
 .poster .f4 .sep{font-size:.9em;}
 .poster .f4 .item{white-space:normal;}
+/* Póster por noche */
+.poster .noche-bloque + .noche-bloque{margin-top:clamp(34px,6cqw,60px);padding-top:clamp(28px,5cqw,48px);border-top:1px solid rgba(244,194,91,.22);}
+.poster .noche-tit{font-weight:800;font-size:clamp(11px,1.9cqw,15px);letter-spacing:.34em;text-transform:uppercase;color:var(--gris);margin-bottom:clamp(10px,2cqw,18px);}
+.poster .noche-tit span{display:block;font-family:var(--f-display);font-weight:400;font-size:clamp(26px,6cqw,52px);letter-spacing:.03em;color:var(--oro-vivo);line-height:1;margin-bottom:4px;}
+.poster .secund,.poster .acad{margin:clamp(14px,2.6cqw,22px) auto 0;max-width:46em;line-height:1.65;}
+.poster .secund b,.poster .acad b{display:block;font-size:11px;font-weight:800;letter-spacing:.3em;text-transform:uppercase;color:var(--oro);margin-bottom:4px;}
+.poster .secund a{font-weight:800;font-size:clamp(13px,2.3cqw,17px);text-transform:uppercase;letter-spacing:.06em;color:rgba(247,236,214,.88);text-decoration:none;}
+.poster .acad{font-size:clamp(12px,2cqw,14px);color:rgba(247,236,214,.7);}
+.poster .secund i,.poster .acad i{font-style:normal;color:var(--oro);padding:0 .5em;}
+.poster .secund span{white-space:nowrap;}   /* cada nombre entero: si no entra, baja completo */
 .poster .toque{margin-top:22px;font-size:13px;color:var(--gris);}
 /* Foto que sigue al mouse sobre el nombre (solo con mouse). */
 .flotante{position:fixed;left:0;top:0;width:260px;height:300px;pointer-events:none;z-index:60;opacity:0;transform:translate(-50%,-110%) scale(.9);
@@ -625,11 +636,11 @@ footer{background:#04060f;padding:56px 0 calc(110px + env(safe-area-inset-bottom
     <div class="hero-pie">
       <div class="nombres" aria-label="Artistas confirmados">
         <p class="l1"><span>Raly Barrionuevo<i>✦</i></span><wbr><span>Orellana Lucca<i>✦</i></span><wbr><span>Dúo Coplanacu</span></p>
-        <p class="l2"><span>Marcelo Toledo<i>✦</i></span><wbr><span>Demi Carabajal<i>✦</i></span><wbr><span>Las Sachaguitarras Atamisqueñas</span></p>
-        <p class="l2"><span>Alejandro Véliz<i>✦</i></span><wbr><span>Franco Escobedo<i>✦</i></span><wbr><span>Planeador V<i>✦</i></span><wbr><span>JLS Ternura</span></p>
-        <p class="l2"><span>Los Bonys<i>✦</i></span><wbr><span>Pochi Chávez<i>✦</i></span><wbr><span>Claudio Acosta<i>✦</i></span><wbr><span>Nolberto Al K La</span></p>
-        <p class="l2"><span>Ricardo Sosa y La Ranchada<i>✦</i></span><wbr><span>Los Golpes</span></p>
-        <p class="l3"><span>DJ Leo Lencina<i>✦</i></span><wbr><span>Artistas y academias de Fernández</span></p>
+        <p class="l2"><span>Marcelo Toledo<i>✦</i></span><wbr><span>Demi Carabajal<i>✦</i></span><wbr><span>Alejandro Véliz</span></p>
+        <p class="l2"><span>Planeador V<i>✦</i></span><wbr><span>Franco Escobedo<i>✦</i></span><wbr><span>Pochi Chávez<i>✦</i></span><wbr><span>Los Golpes</span></p>
+        <p class="l2"><span>Claudio Acosta<i>✦</i></span><wbr><span>Los Bonys<i>✦</i></span><wbr><span>Ricardo Sosa y La Ranchada</span></p>
+        <p class="l2"><span>Los Talentosos del Chamamé<i>✦</i></span><wbr><span>JLS Ternura</span></p>
+        <p class="l3"><span>Artistas locales y academias</span></p>
       </div>
       <p class="hero-fecha">Sábado 9 y domingo 10 de enero 2027</p>
       <p class="hero-lugar">Club Independiente · Fernández</p>
@@ -811,7 +822,7 @@ footer{background:#04060f;padding:56px 0 calc(110px + env(safe-area-inset-bottom
     <p class="creditos">
       Foto Raly Barrionuevo: Abelrom, CC BY-SA 3.0. Foto Marcelo Toledo: Lu Álvarez Quiroga.
       Fotos de prensa: Dúo Coplanacu, La Voz (Jesús María 2026); Las Sachaguitarras Atamisqueñas, Sur Santiagueño (52° aniversario, 2023);
-      Nolberto Al K La, videoclip "Te extraño amor". Resto de las fotos de artistas: prensa de cada artista.
+      Resto de las fotos de artistas: prensa de cada artista.
       Fondos del trigal y la noche de festival en la cancha: recreaciones generadas con IA. Imagen satelital: Esri / Maxar.
     </p>
   </div>
@@ -851,14 +862,16 @@ const FESTIVAL = {
   cargoPct: null,             // lo completa el sistema de venta: con él se muestra el precio final
   estado: {},                 // disponible · pocas · agotado, por sab, dom y abono
   noches: [
-    // precio: null muestra "a confirmar". artistas: claves de la lista de abajo; locales: claves de FESTIVAL.locales.
-    // Grilla por noche que pasó la organización el 19/10.
+    // Cartelera definitiva de la organización (19/10). artistas: principales (claves de FESTIVAL.artistas);
+    // locales: secundarios (claves de FESTIVAL.locales); academias: texto.
     { id: 'sab', dia: 'Sábado', num: 9, precio: 30000,
-      artistas: ['raly', 'coplanacu', 'sachas', 'pochi', 'golpes', 'planeador', 'escobedo', 'lencina'],
-      locales: ['cristian', 'rodri', 'garzamanta', 'masa', 'sayago', 'gimenez', 'leo'] },
+      artistas: ['raly', 'coplanacu', 'veliz', 'planeador', 'pochi', 'escobedo', 'golpes'],
+      locales: ['sachas', 'cristian', 'rodri', 'leo', 'garzamanta', 'sayago', 'masa', 'gimenez', 'leiva'],
+      academias: ['Academia Juan Saavedra (invitada, Santiago capital)', 'Escuela Municipal de Folklore Félix Patricio Carol (prof. Raúl Coria)'] },
     { id: 'dom', dia: 'Domingo', num: 10, precio: 30000,
-      artistas: ['orellana', 'toledo', 'demi', 'veliz', 'bonys', 'acosta', 'ranchada', 'alkala', 'ternura'],
-      locales: ['brujitos', 'greda', 'leiva', 'vozdelmonte', 'siete', 'talentosos', 'zagales', 'rocky', 'adrian'] },
+      artistas: ['orellana', 'toledo', 'demi', 'acosta', 'bonys', 'ranchada', 'talentosos', 'ternura'],
+      locales: ['saucena', 'miski', 'siete', 'greda', 'vozdelmonte', 'brujitos', 'zagales', 'chimpa', 'adrian', 'rocky'],
+      academias: ['Taller de Danza Adultos Frutos de la Danza (prof. Daniel Mansilla)', 'Grupo juvenil Félix Patricio Carol (prof. Raúl Coria)'] },
   ],
   abono: { precio: 50000 },
   artistas: {
@@ -872,39 +885,43 @@ const FESTIVAL = {
     acosta:    { nombre: 'Claudio Acosta', genero: 'Folklore', foto: true },
     ranchada:  { nombre: 'Ricardo Sosa y La Ranchada', genero: 'Chamamé', foto: true },
     coplanacu: { nombre: 'Dúo Coplanacu', genero: 'Folklore', foto: true, detalle: 'Roberto Cantos y Julio Paz' },
-    sachas:    { nombre: 'Las Sachaguitarras Atamisqueñas', genero: 'Folklore', foto: true, detalle: 'Desde Atamisqui, con sus sachaguitarras y sachaviolines' },
     toledo:    { nombre: 'Marcelo Toledo', genero: 'Folklore', foto: true },
     demi:      { nombre: 'Demi Carabajal', genero: 'Folklore', foto: true },
-    alkala:    { nombre: 'Nolberto Al K La', genero: 'Merengue y cuarteto', foto: true, fondo: 'Al K La' },
-    ternura:   { nombre: 'JLS Ternura', genero: '', foto: true },
+    ternura:   { nombre: 'JLS Ternura', genero: '', foto: true, detalle: 'José Luis Salinas' },
+    talentosos: { nombre: 'Los Talentosos del Chamamé', genero: 'Chamamé', foto: true, fondo: 'Chamamé' },
     golpes:    { nombre: 'Los Golpes', genero: '' },
-    lencina:   { nombre: 'DJ Leo Lencina', genero: 'DJ' },
-    locales:   { nombre: 'Artistas y academias de Fernández', local: true },
   },
-  // Filas del póster, de mayor a menor (igual que el flyer).
-  poster: [['raly', 'orellana', 'coplanacu'], ['toledo', 'demi', 'sachas'], ['veliz', 'escobedo', 'planeador', 'ternura'],
-           ['bonys', 'pochi', 'acosta', 'alkala'], ['ranchada', 'golpes'], ['lencina', 'locales']],
+  // Póster por noche: filas de mayor a menor. Los secundarios y las academias salen de FESTIVAL.noches.
+  poster: {
+    sab: [['raly', 'coplanacu'], ['veliz', 'planeador', 'escobedo'], ['pochi', 'golpes']],
+    dom: [['orellana', 'toledo'], ['demi', 'acosta', 'bonys'], ['ranchada', 'talentosos', 'ternura']],
+  },
   menoresGratisHasta: null,   // edad, cuando se confirme
   puertas: null,              // por ejemplo '20 h'
   whatsappPuestos: null,      // número con código de país, sin espacios: '549385...'
   // Artistas locales, en el orden de prioridad que pasó la organización. La foto es assets/locales/<clave>.webp
   locales: [
-    { clave: 'garzamanta', nombre: 'Garzamanta' },
-    { clave: 'brujitos', nombre: 'Los Brujitos' },
-    { clave: 'greda', nombre: 'La Greda', detalle: 'Voz y vos' },
-    { clave: 'masa', nombre: 'Masa y sus Yanasus' },
-    { clave: 'sayago', nombre: 'Diego Sayago', detalle: 'y los de ahicito' },
-    { clave: 'leiva', nombre: 'Germán Leiva' },
-    { clave: 'vozdelmonte', nombre: 'La Voz del Monte', detalle: 'Sachapas Simin' },
-    { clave: 'gimenez', nombre: 'Los Hermanitos Giménez' },
-    { clave: 'siete', nombre: 'Los Siete del Chamamé' },
-    { clave: 'talentosos', nombre: 'Los Talentosos del Chamamé' },
-    { clave: 'zagales', nombre: 'Zagales', detalle: 'Folclore del corazón' },
-    { clave: 'rodri', nombre: 'Rodri Salvatierra' },
+    // Secundarios en el orden de la organización: primero los del sábado, después los del domingo.
+    // La foto es assets/locales/<clave>.webp (sinFoto: se muestra el logo hasta que llegue la foto).
+    { clave: 'sachas', nombre: 'Las Sachaguitarras Atamisqueñas' },
     { clave: 'cristian', nombre: 'Cristian Heredia' },
+    { clave: 'rodri', nombre: 'Rodri Salvatierra' },
     { clave: 'leo', nombre: 'Leo Lencina', detalle: 'DJ' },
-    { clave: 'rocky', nombre: 'DJ Rocky' },
+    { clave: 'garzamanta', nombre: 'Garzamanta' },
+    { clave: 'sayago', nombre: 'Diego Sayago', detalle: 'y los de ahicito' },
+    { clave: 'masa', nombre: 'Masa y sus Yanasus' },
+    { clave: 'gimenez', nombre: 'Los Hermanitos Giménez' },
+    { clave: 'leiva', nombre: 'Germán Leiva' },
+    { clave: 'saucena', nombre: 'La Sauceña', sinFoto: true },
+    { clave: 'miski', nombre: 'Miski Yimy', sinFoto: true },
+    { clave: 'siete', nombre: 'Los Siete del Chamamé' },
+    { clave: 'greda', nombre: 'La Greda', detalle: 'Voz y vos' },
+    { clave: 'vozdelmonte', nombre: 'La Voz del Monte', detalle: 'Sachapas Simin' },
+    { clave: 'brujitos', nombre: 'Los Brujitos' },
+    { clave: 'zagales', nombre: 'Zagales', detalle: 'Folclore del corazón' },
+    { clave: 'chimpa', nombre: 'Chimpa Núñez', sinFoto: true },
     { clave: 'adrian', nombre: 'DJ Adrián' },
+    { clave: 'rocky', nombre: 'DJ Rocky' },
   ],
 };
 
@@ -1048,24 +1065,28 @@ pintarVenta();
 
 /* ── Cartelera: póster tipográfico, foto al pasar el mouse y ficha al tocar ── */
 (() => {
-  const clases = ['f1', 'f2', 'f2', 'f3', 'f3'];
+  const clases = ['f1', 'f2', 'f3', 'f3'];
+  const nombreLocal = k => FESTIVAL.locales.find(l => l.clave === k)?.nombre || k;
   let color = 0;   // las filas del medio alternan crema, maíz y hoja
-  $('#poster').innerHTML = FESTIVAL.poster.map((fila, i) => `<div class="fila ${i === FESTIVAL.poster.length - 1 ? 'f4' : clases[i] || 'f3'} revelar" style="--d:${i * 80}ms">${
-    fila.map(k => {
+  const fila = (f, i) => `<div class="fila ${clases[i] || 'f3'} revelar" style="--d:${i * 80}ms">${
+    f.map(k => {
       const a = FESTIVAL.artistas[k];
-      const c = i > 0 && i < FESTIVAL.poster.length - 1 ? ` c${color++ % 3}` : '';
+      const c = i > 0 ? ` c${color++ % 3}` : '';
       const nombre = a.foto
         ? `<button type="button" class="art-n${c}" data-artista="${k}" aria-haspopup="dialog">${escapar(a.nombre)}</button>`
-        : a.local ? `<a class="art-n${c}" href="#locales">${escapar(a.nombre)}</a>`
         : `<span class="art-n${c}">${escapar(a.nombre)}</span>`;
       // El ✦ va pegado al nombre anterior, como una coma: si la fila se parte, nunca queda solo al principio.
-      return `<span class="item">${nombre}${k === fila[fila.length - 1] ? '' : '<span class="sep" aria-hidden="true">✦</span>'}</span>`;
-    }).join('')}</div>`).join('')
-    + `<p class="mas revelar">Y se siguen sumando artistas</p>`
+      return `<span class="item">${nombre}${k === f[f.length - 1] ? '' : '<span class="sep" aria-hidden="true">✦</span>'}</span>`;
+    }).join('')}</div>`;
+  $('#poster').innerHTML = FESTIVAL.noches.map(n => `<section class="noche-bloque" aria-label="${n.dia} ${n.num}">
+      <p class="noche-tit revelar"><span>${n.dia} ${n.num}</span> de enero</p>
+      ${(FESTIVAL.poster[n.id] || []).map(fila).join('')}
+      ${(n.locales || []).length ? `<p class="secund revelar"><b>Artistas locales</b><a href="#locales">${n.locales.map((k, j) =>
+        `<span>${escapar(nombreLocal(k))}${j < n.locales.length - 1 ? '<i>✦</i>' : ''}</span>`).join('<wbr>')}</a></p>` : ''}
+      ${(n.academias || []).length ? `<p class="acad revelar"><b>Academias</b>${n.academias.map(escapar).join('<i>✦</i>')}</p>` : ''}
+    </section>`).join('')
     + `<p class="toque revelar">${conMouse ? 'Pasá el mouse por un nombre para ver al artista.' : 'Tocá un nombre para ver al artista.'}</p>`
-    + `<div class="noches-aviso revelar">${FESTIVAL.noches.map(n =>
-        `<span><b>${n.dia} ${n.num}</b>${n.artistas.length ? n.artistas.length + (n.locales || []).filter(k => k !== 'leo').length + ' artistas' : ''}</span>`).join('')}
-        ${hayGrilla ? '' : '<span class="pronto">La grilla de cada noche se anuncia muy pronto.</span>'}</div>`;
+    ;
 
   // Foto flotante que sigue al mouse
   const flot = $('#flotante'), flotImg = $('img', flot);
@@ -1110,8 +1131,9 @@ function pintarBoletos() {
   const grilla = n => n.artistas.length
     ? `<b>${n.artistas.slice(0, 2).map(k => escapar(FESTIVAL.artistas[k].nombre)).join(', ')}</b>${n.artistas.length > 2
         ? ', ' + n.artistas.slice(2).map(k => escapar(FESTIVAL.artistas[k].nombre)).join(', ') : ''}`
-      + ((n.locales || []).filter(k => k !== 'leo').length
-        ? `<span class="b-locales">Artistas locales: ${(n.locales || []).filter(k => k !== 'leo').map(k => escapar(nombreLocal(k))).join(', ')}</span>` : '')
+      + ((n.locales || []).length
+        ? `<span class="b-locales">Artistas locales: ${n.locales.map(k => escapar(nombreLocal(k))).join(', ')}</span>` : '')
+      + ((n.academias || []).length ? `<span class="b-locales">Academias: ${n.academias.map(escapar).join(', ')}</span>` : '')
     : 'Grilla de la noche: se anuncia muy pronto.';
   const conFinal = FESTIVAL.venta.abierta && FESTIVAL.cargoPct != null;
   const precio = p => !p ? `<div class="b-precio confirmar">Precio<br>a confirmar</div>`
@@ -1265,7 +1287,7 @@ pintarPreguntas();
   const car = $('#carrusel');
   const nocheLocal = k => FESTIVAL.noches.filter(n => (n.locales || []).includes(k)).map(n => `${n.dia} ${n.num}`).join(' y ');
   car.innerHTML = FESTIVAL.locales.map(a => `<article class="local">
-      <img data-src="assets/locales/${a.clave}.webp" alt="${escapar(a.nombre)}" decoding="async">
+      <img data-src="${a.sinFoto ? 'assets/logo-festival-v3-440.webp' : `assets/locales/${a.clave}.webp`}" alt="${escapar(a.nombre)}"${a.sinFoto ? ' class="sin-foto"' : ''} decoding="async">
       <div class="tarima"><small>Artistas locales${nocheLocal(a.clave) ? ' · ' + nocheLocal(a.clave) : ''}</small><b>${escapar(a.nombre)}</b>${a.detalle ? `<span>${escapar(a.detalle)}</span>` : ''}</div>
     </article>`).join('');
   // Las flechas corren una tarjeta. Con la pasarela andando, se suman a su movimiento sin frenarla.
