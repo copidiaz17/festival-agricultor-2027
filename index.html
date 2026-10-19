@@ -317,6 +317,7 @@ html.quieto .haces i,html.quieto .espigas g{animation-play-state:paused;}
 .titulo.visible .pal > span{transform:none;}
 .revelar{opacity:0;transform:translateY(28px);transition:opacity .8s ease, transform .8s cubic-bezier(.2,.8,.2,1);transition-delay:var(--d,0ms);}
 .revelar.visible{opacity:1;transform:none;}
+.b-pocas{display:block;margin-top:6px;font-weight:800;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#b3412a;}
 
 /* Borde de espigas entre secciones (dibujo repetido, sin imágenes). */
 .borde-espigas{height:46px;opacity:.9;background-repeat:repeat-x;background-size:auto 100%;
@@ -427,6 +428,7 @@ html.quieto .haces i,html.quieto .espigas g{animation-play-state:paused;}
 .b-cuerpo h3{font-family:var(--f-display);font-weight:400;text-transform:uppercase;font-size:28px;line-height:1.02;margin-top:4px;color:var(--tinta);}
 .b-grilla{margin-top:8px;font-size:13.5px;color:#6a4a32;line-height:1.5;}
 .b-grilla b{color:var(--tinta);}
+.b-grilla .b-locales{display:block;margin-top:6px;font-size:12.5px;}
 .b-pie{margin-top:auto;padding-top:14px;display:flex;align-items:flex-end;justify-content:space-between;gap:10px;}
 .b-precio{font-family:var(--f-display);font-weight:400;font-size:30px;line-height:1;color:var(--tierra);max-width:calc(100% - 128px);}
 .b-precio small{display:block;font-family:var(--f-texto);font-weight:700;font-size:11px;letter-spacing:.08em;color:#6a4a32;margin-top:4px;text-transform:none;}
@@ -846,10 +848,17 @@ const FESTIVAL = {
   primeraNoche: '2027-01-09T21:00:00-03:00',
   // Cuando el sistema de venta esté andando: abierta: true y url a la compra.
   venta: { abierta: false, url: '#entradas' },
+  cargoPct: null,             // lo completa el sistema de venta: con él se muestra el precio final
+  estado: {},                 // disponible · pocas · agotado, por sab, dom y abono
   noches: [
-    // precio: null muestra "a confirmar". artistas: claves de la lista de abajo.
-    { id: 'sab', dia: 'Sábado', num: 9, precio: 30000, artistas: [] },
-    { id: 'dom', dia: 'Domingo', num: 10, precio: 30000, artistas: [] },
+    // precio: null muestra "a confirmar". artistas: claves de la lista de abajo; locales: claves de FESTIVAL.locales.
+    // Grilla por noche que pasó la organización el 19/10.
+    { id: 'sab', dia: 'Sábado', num: 9, precio: 30000,
+      artistas: ['raly', 'coplanacu', 'sachas', 'pochi', 'golpes', 'planeador', 'escobedo', 'lencina'],
+      locales: ['cristian', 'rodri', 'garzamanta', 'masa', 'sayago', 'gimenez', 'leo'] },
+    { id: 'dom', dia: 'Domingo', num: 10, precio: 30000,
+      artistas: ['orellana', 'toledo', 'demi', 'veliz', 'bonys', 'acosta', 'ranchada', 'alkala', 'ternura'],
+      locales: ['brujitos', 'greda', 'leiva', 'vozdelmonte', 'siete', 'talentosos', 'zagales', 'rocky', 'adrian'] },
   ],
   abono: { precio: 50000 },
   artistas: {
@@ -925,7 +934,7 @@ $$('#menu-movil a').forEach(a => a.addEventListener('click', () => menu(false)))
 addEventListener('keydown', e => { if (e.key === 'Escape') menu(false); });
 
 /* ── Estado de la venta: los botones dicen lo que pasa hoy ── */
-(() => {
+function pintarVenta() {
   const abierta = FESTIVAL.venta.abierta;
   $$('[data-texto-venta]').forEach(a => {
     a.textContent = abierta ? 'Comprar entradas' : a.dataset.textoVenta === 'largo' ? 'Entradas: muy pronto' : 'Entradas';
@@ -935,11 +944,15 @@ addEventListener('keydown', e => { if (e.key === 'Escape') menu(false); });
     $('#barra-texto').textContent = 'Entradas a la venta';
     $('#barra-btn').textContent = 'Comprar'; $('#barra-btn').href = FESTIVAL.venta.url;
     $('#entradas-kicker').textContent = 'Venta online abierta';
+    $('#entradas-bajada').textContent = 'Elegís la noche o el abono, pagás online y el QR te llega al correo al instante.';
   }
   const textoMenores = FESTIVAL.menoresGratisHasta
     ? `Menores de ${FESTIVAL.menoresGratisHasta} años: entran gratis.` : 'Menores: se informa con la apertura de la venta.';
-  $('#servicio').textContent = `Los precios online llevan un costo de servicio. ${textoMenores}`;
-})();
+  $('#servicio').textContent = abierta && FESTIVAL.cargoPct != null
+    ? `Precios finales: ya incluyen el costo de servicio (${FESTIVAL.cargoPct} %). ${textoMenores}`
+    : `Los precios online llevan un costo de servicio. ${textoMenores}`;
+}
+pintarVenta();
 
 /* ── Cuenta regresiva en noches (se cuentan fechas, no horas: a la medianoche baja una) ── */
 (() => {
@@ -1051,7 +1064,7 @@ addEventListener('keydown', e => { if (e.key === 'Escape') menu(false); });
     + `<p class="mas revelar">Y se siguen sumando artistas</p>`
     + `<p class="toque revelar">${conMouse ? 'Pasá el mouse por un nombre para ver al artista.' : 'Tocá un nombre para ver al artista.'}</p>`
     + `<div class="noches-aviso revelar">${FESTIVAL.noches.map(n =>
-        `<span><b>${n.dia} ${n.num}</b>${n.artistas.length ? n.artistas.length + ' artistas' : ''}</span>`).join('')}
+        `<span><b>${n.dia} ${n.num}</b>${n.artistas.length ? n.artistas.length + (n.locales || []).filter(k => k !== 'leo').length + ' artistas' : ''}</span>`).join('')}
         ${hayGrilla ? '' : '<span class="pronto">La grilla de cada noche se anuncia muy pronto.</span>'}</div>`;
 
   // Foto flotante que sigue al mouse
@@ -1092,36 +1105,43 @@ addEventListener('keydown', e => { if (e.key === 'Escape') menu(false); });
 })();
 
 /* ── Entradas: un boleto por noche y el abono ── */
-(() => {
+function pintarBoletos() {
+  const nombreLocal = k => FESTIVAL.locales.find(l => l.clave === k)?.nombre || k;
   const grilla = n => n.artistas.length
     ? `<b>${n.artistas.slice(0, 2).map(k => escapar(FESTIVAL.artistas[k].nombre)).join(', ')}</b>${n.artistas.length > 2
         ? ', ' + n.artistas.slice(2).map(k => escapar(FESTIVAL.artistas[k].nombre)).join(', ') : ''}`
+      + ((n.locales || []).filter(k => k !== 'leo').length
+        ? `<span class="b-locales">Artistas locales: ${(n.locales || []).filter(k => k !== 'leo').map(k => escapar(nombreLocal(k))).join(', ')}</span>` : '')
     : 'Grilla de la noche: se anuncia muy pronto.';
-  const precio = p => p
-    ? `<div class="b-precio">${pesos(p)}<small>+ costo de servicio</small></div>`
-    : `<div class="b-precio confirmar">Precio<br>a confirmar</div>`;
-  const sello = FESTIVAL.venta.abierta ? '' : '<span class="sello" aria-hidden="true">Próximamente</span>';
-  const boton = FESTIVAL.venta.abierta ? `<a class="btn btn-tierra" href="${FESTIVAL.venta.url}">Comprar</a>` : '';
+  const conFinal = FESTIVAL.venta.abierta && FESTIVAL.cargoPct != null;
+  const precio = p => !p ? `<div class="b-precio confirmar">Precio<br>a confirmar</div>`
+    : conFinal ? `<div class="b-precio">${pesos(Math.round(p * (1 + FESTIVAL.cargoPct / 100)))}<small>precio final</small></div>`
+    : `<div class="b-precio">${pesos(p)}<small>+ costo de servicio</small></div>`;
+  const sello = id => !FESTIVAL.venta.abierta ? '<span class="sello" aria-hidden="true">Próximamente</span>'
+    : FESTIVAL.estado[id] === 'agotado' ? '<span class="sello" aria-hidden="true">Agotado</span>' : '';
+  const boton = id => !FESTIVAL.venta.abierta || FESTIVAL.estado[id] === 'agotado' ? ''
+    : `<a class="btn btn-tierra" href="${FESTIVAL.venta.url}?tipo=${id}">Comprar</a>${FESTIVAL.estado[id] === 'pocas' ? '<small class="b-pocas">Quedan pocas</small>' : ''}`;
   $('#boletos').innerHTML = FESTIVAL.noches.map((n, i) => `
     <article class="boleto revelar" style="--d:${i * 90}ms">
       <div class="b-talon"><span>${n.dia.slice(0, 3)}</span><b>${n.num}</b><span>Ene</span></div>
-      <div class="b-cuerpo">${sello}
+      <div class="b-cuerpo">${sello(n.id)}
         <p class="b-sobre">${['Primera', 'Segunda'][i] || ''} noche · General</p>
         <h3>${n.dia} ${n.num} de enero</h3>
         <p class="b-grilla">${grilla(n)}</p>
-        <div class="b-pie">${precio(n.precio)}${boton}</div>
+        <div class="b-pie">${precio(n.precio)}${boton(n.id)}</div>
       </div>
     </article>`).join('') + `
     <article class="boleto abono revelar" style="--d:${FESTIVAL.noches.length * 90}ms">
       <div class="b-talon"><span>Abono</span><b>2</b><span>Noches</span></div>
-      <div class="b-cuerpo">${sello}
+      <div class="b-cuerpo">${sello('abono')}
         <p class="b-sobre">Sábado + domingo</p>
         <h3>Abono 2 noches</h3>
         <p class="b-grilla">Las dos noches del festival en una sola compra, y sale menos que dos entradas sueltas.</p>
-        <div class="b-pie">${precio(FESTIVAL.abono.precio)}${boton}</div>
+        <div class="b-pie">${precio(FESTIVAL.abono.precio)}${boton('abono')}</div>
       </div>
     </article>`;
-})();
+}
+pintarBoletos();
 
 /* ── Agendar (archivo de calendario) y compartir por WhatsApp ── */
 (() => {
@@ -1157,8 +1177,9 @@ addEventListener('keydown', e => { if (e.key === 'Escape') menu(false); });
 })();
 
 /* ── Preguntas frecuentes (las que dependen de un dato pendiente aparecen solas cuando se carga) ── */
-(() => {
-  const abono = FESTIVAL.abono.precio ? ` por ${pesos(FESTIVAL.abono.precio)} más el costo de servicio` : '';
+function pintarPreguntas() {
+  const abono = !FESTIVAL.abono.precio ? '' : FESTIVAL.venta.abierta && FESTIVAL.cargoPct != null
+    ? ` por ${pesos(Math.round(FESTIVAL.abono.precio * (1 + FESTIVAL.cargoPct / 100)))} final` : ` por ${pesos(FESTIVAL.abono.precio)} más el costo de servicio`;
   const lista = [
     ['¿Cuándo salen a la venta las entradas?', FESTIVAL.venta.abierta
       ? 'Ya están a la venta, acá mismo. Elegís la noche o el abono, pagás online y el QR te llega al correo.'
@@ -1174,6 +1195,24 @@ addEventListener('keydown', e => { if (e.key === 'Escape') menu(false); });
   ].filter(Boolean);
   $('#preguntas-lista').innerHTML = lista.map(([p, r]) =>
     `<details class="revelar"><summary>${escapar(p)}</summary><p>${escapar(r)}</p></details>`).join('');
+}
+pintarPreguntas();
+
+/* ── Sistema de venta: si la página la sirve el sistema, trae precios y estado de la venta ── */
+(() => {
+  if (!/^https?:$/.test(location.protocol) || /github\.io$/.test(location.hostname)) return;
+  fetch('/api/config', { cache: 'no-store' }).then(r => r.ok ? r.json() : null).then(cfg => {
+    if (!cfg || !cfg.tipos) return;
+    fetch('/api/visita', { method: 'POST' }).catch(() => {});
+    if (!cfg.ventaAbierta) return;
+    FESTIVAL.venta = { abierta: true, url: '/comprar' };
+    FESTIVAL.cargoPct = cfg.cargoPct;
+    FESTIVAL.noches.forEach(n => { if (cfg.tipos[n.id]) n.precio = cfg.tipos[n.id].precio; });
+    if (cfg.tipos.abono) FESTIVAL.abono.precio = cfg.tipos.abono.precio;
+    FESTIVAL.estado = Object.fromEntries(Object.entries(cfg.tipos).map(([k, t]) => [k, t.estado]));
+    pintarVenta(); pintarBoletos(); pintarPreguntas();
+    $$('#boletos .revelar, #preguntas-lista .revelar').forEach(e => e.classList.add('visible'));
+  }).catch(() => {});
 })();
 
 /* ── Videos: bajan recién cuando se acercan a la pantalla, y se pausan al salir.
@@ -1224,9 +1263,10 @@ addEventListener('keydown', e => { if (e.key === 'Escape') menu(false); });
 /* ── Artistas locales: tarjetas en un carrusel que se desliza con el dedo ── */
 (() => {
   const car = $('#carrusel');
+  const nocheLocal = k => FESTIVAL.noches.filter(n => (n.locales || []).includes(k)).map(n => `${n.dia} ${n.num}`).join(' y ');
   car.innerHTML = FESTIVAL.locales.map(a => `<article class="local">
       <img data-src="assets/locales/${a.clave}.webp" alt="${escapar(a.nombre)}" decoding="async">
-      <div class="tarima"><small>Artistas locales</small><b>${escapar(a.nombre)}</b>${a.detalle ? `<span>${escapar(a.detalle)}</span>` : ''}</div>
+      <div class="tarima"><small>Artistas locales${nocheLocal(a.clave) ? ' · ' + nocheLocal(a.clave) : ''}</small><b>${escapar(a.nombre)}</b>${a.detalle ? `<span>${escapar(a.detalle)}</span>` : ''}</div>
     </article>`).join('');
   // Las flechas corren una tarjeta. Con la pasarela andando, se suman a su movimiento sin frenarla.
   let empujar = d => car.scrollBy({ left: d, behavior: reducir ? 'auto' : 'smooth' });
