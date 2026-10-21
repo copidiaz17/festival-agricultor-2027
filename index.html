@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>1er Festival del Agricultor · Fernández 2027</title>
-<meta name="description" content="Sábado 9 y domingo 10 de enero de 2027 en el Club Independiente de Fernández, Santiago del Estero. Raly Barrionuevo, Orellana Lucca, Dúo Coplanacu, Las Sachaguitarras Atamisqueñas, Marcelo Toledo, Demi Carabajal, Alejandro Véliz, Planeador V, Los Bonys y más. Entradas online muy pronto.">
+<meta name="description" content="Sábado 9 y domingo 10 de enero de 2027 en el Club Independiente de Fernández, Santiago del Estero. Raly Barrionuevo, Orellana Lucca, Dúo Coplanacu, JLS Ternura, Demi Carabajal, Marcelo Toledo, Claudio Acosta, Alejandro Véliz, Planeador V, Los Bonys y más. Entradas online muy pronto.">
 <!-- Vista previa: sacar esta línea el día que se lance la venta. -->
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#070a1c">
@@ -635,11 +635,11 @@ footer{background:#04060f;padding:56px 0 calc(110px + env(safe-area-inset-bottom
 
     <div class="hero-pie">
       <div class="nombres" aria-label="Artistas confirmados">
-        <p class="l1"><span>Raly Barrionuevo<i>✦</i></span><wbr><span>Orellana Lucca<i>✦</i></span><wbr><span>Dúo Coplanacu</span></p>
-        <p class="l2"><span>Marcelo Toledo<i>✦</i></span><wbr><span>Demi Carabajal<i>✦</i></span><wbr><span>Alejandro Véliz</span></p>
-        <p class="l2"><span>Planeador V<i>✦</i></span><wbr><span>Franco Escobedo<i>✦</i></span><wbr><span>Pochi Chávez<i>✦</i></span><wbr><span>Los Golpes</span></p>
-        <p class="l2"><span>Claudio Acosta<i>✦</i></span><wbr><span>Los Bonys<i>✦</i></span><wbr><span>Ricardo Sosa y La Ranchada</span></p>
-        <p class="l2"><span>Los Talentosos del Chamamé<i>✦</i></span><wbr><span>JLS Ternura</span></p>
+        <p class="l1"><span>Raly Barrionuevo<i>✦</i></span><wbr><span>Orellana Lucca<i>✦</i></span><wbr><span>Dúo Coplanacu<i>✦</i></span><wbr><span>JLS Ternura</span></p>
+        <p class="l2"><span>Demi Carabajal<i>✦</i></span><wbr><span>Marcelo Toledo<i>✦</i></span><wbr><span>Claudio Acosta</span></p>
+        <p class="l2"><span>Alejandro Véliz<i>✦</i></span><wbr><span>Planeador V<i>✦</i></span><wbr><span>Franco Escobedo</span></p>
+        <p class="l2"><span>Pochi Chávez<i>✦</i></span><wbr><span>Los Golpes<i>✦</i></span><wbr><span>Los Bonys</span></p>
+        <p class="l2"><span>Ricardo Sosa y La Ranchada<i>✦</i></span><wbr><span>Los Talentosos del Chamamé</span></p>
         <p class="l3"><span>Artistas locales y academias</span></p>
       </div>
       <p class="hero-fecha">Sábado 9 y domingo 10 de enero 2027</p>
@@ -869,7 +869,7 @@ const FESTIVAL = {
       locales: ['sachas', 'cristian', 'rodri', 'leo', 'garzamanta', 'sayago', 'masa', 'gimenez', 'leiva'],
       academias: ['Academia Juan Saavedra (invitada, Santiago capital)', 'Escuela Municipal de Folklore Félix Patricio Carol (prof. Raúl Coria)'] },
     { id: 'dom', dia: 'Domingo', num: 10, precio: 30000,
-      artistas: ['orellana', 'toledo', 'demi', 'acosta', 'bonys', 'ranchada', 'talentosos', 'ternura'],
+      artistas: ['orellana', 'ternura', 'demi', 'toledo', 'acosta', 'bonys', 'ranchada', 'talentosos'],
       locales: ['saucena', 'miski', 'siete', 'greda', 'vozdelmonte', 'brujitos', 'zagales', 'chimpa', 'adrian', 'rocky'],
       academias: ['Taller de Danza Adultos Frutos de la Danza (prof. Daniel Mansilla)', 'Grupo juvenil Félix Patricio Carol (prof. Raúl Coria)'] },
   ],
@@ -894,7 +894,8 @@ const FESTIVAL = {
   // Póster por noche: filas de mayor a menor. Los secundarios y las academias salen de FESTIVAL.noches.
   poster: {
     sab: [['raly', 'coplanacu'], ['veliz', 'planeador', 'escobedo'], ['pochi', 'golpes']],
-    dom: [['orellana', 'toledo'], ['demi', 'acosta', 'bonys'], ['ranchada', 'talentosos', 'ternura']],
+    // Domingo en tres niveles (José, 20/10): Orellana y Ternura; Demi, Toledo y Acosta; el resto.
+    dom: [['orellana', 'ternura'], ['demi', 'toledo', 'acosta'], ['bonys', 'ranchada', 'talentosos']],
   },
   menoresGratisHasta: null,   // edad, cuando se confirme
   puertas: null,              // por ejemplo '20 h'
@@ -1189,8 +1190,8 @@ pintarBoletos();
   });
   // Sin emojis: por enlace de WhatsApp llegan rotos.
   const texto = '1er Festival del Agricultor en Fernandez: sabado 9 y domingo 10 de enero en el Club Independiente. '
-    + 'Raly Barrionuevo, Orellana Lucca, Duo Coplanacu, Las Sachaguitarras Atamisquenas, Marcelo Toledo, Demi Carabajal, '
-    + 'Alejandro Veliz, Planeador V, Los Bonys y muchos mas. ' + url;
+    + 'Raly Barrionuevo, Orellana Lucca, Duo Coplanacu, JLS Ternura, Demi Carabajal, Marcelo Toledo, '
+    + 'Claudio Acosta, Alejandro Veliz y muchos mas. ' + url;
   $('#btn-compartir').href = 'https://wa.me/?text=' + encodeURIComponent(texto);
   if (FESTIVAL.whatsappPuestos) {
     $('#anotate').hidden = false;
