@@ -330,7 +330,7 @@ html.quieto .haces i,html.quieto .espigas g{animation-play-state:paused;}
 @media (max-width:900px){ .cartelera-grid{grid-template-columns:1fr;} }
 .poster{text-align:center;}
 /* El tamaño va en la fila: así el ✦ separador se escala con los nombres de su fila. */
-.poster .fila{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;line-height:1.04;}
+.poster .fila{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;line-height:1.04;row-gap:.2em;}   /* aire cuando un renglón baja de línea */
 .poster .fila + .fila{margin-top:clamp(6px,1.2vw,14px);}
 .poster .item{display:inline-flex;align-items:center;white-space:nowrap;max-width:100%;}
 /* Un nombre más ancho que el póster (Las Sachaguitarras Atamisqueñas en un celular chico) se parte en dos renglones. */
