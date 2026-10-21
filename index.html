@@ -326,8 +326,15 @@ html.quieto .haces i,html.quieto .espigas g{animation-play-state:paused;}
 
 /* ══ CARTELERA: póster tipográfico ════════════════════════════ */
 .cartelera{background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(29,39,102,.55),transparent 70%),var(--noche);}
-.cartelera-grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:clamp(30px,5vw,70px);align-items:center;margin-top:40px;}
-@media (max-width:900px){ .cartelera-grid{grid-template-columns:1fr;} }
+.cartelera-grid{margin-top:40px;}
+/* Cada noche: los nombres a la izquierda y su video a la derecha; en pantallas angostas, el video abajo.
+   .noche-txt es el contenedor de las medidas cqw, así los nombres se ajustan al ancho que les queda. */
+.poster .noche-bloque{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:clamp(30px,5vw,70px);align-items:center;}
+.poster .noche-txt{container-type:inline-size;min-width:0;}
+@media (max-width:900px){
+  .poster .noche-bloque{grid-template-columns:1fr;gap:26px;}
+  .poster .noche-bloque .telefono{width:min(78%,270px);}
+}
 .poster{text-align:center;}
 /* El tamaño va en la fila: así el ✦ separador se escala con los nombres de su fila. */
 .poster .fila{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;line-height:1.04;row-gap:.2em;}   /* aire cuando un renglón baja de línea */
@@ -663,12 +670,9 @@ footer{background:#04060f;padding:56px 0 calc(110px + env(safe-area-inset-bottom
   <div class="contenedor">
     <p class="kicker revelar"><b>Lote 01</b>Primeros confirmados</p>
     <h2 class="titulo" id="titulo-cartelera">La <em>cartelera</em></h2>
+    <!-- Cada noche lleva su video al lado (en el celular, abajo): lo arma el JS con FESTIVAL.noches[].video -->
     <div class="cartelera-grid">
       <div class="poster" id="poster"></div>
-      <div class="telefono revelar">
-        <video id="video-cartelera" muted playsinline loop preload="none" poster="assets/video/cartelera-poster.webp"
-               data-src="assets/video/cartelera-9x16.mp4" aria-label="Video de la cartelera del festival"></video>
-      </div>
     </div>
   </div>
 </section>
@@ -864,14 +868,16 @@ const FESTIVAL = {
   noches: [
     // Cartelera definitiva de la organización (19/10). artistas: principales (claves de FESTIVAL.artistas);
     // locales: secundarios (claves de FESTIVAL.locales); academias: texto.
-    { id: 'sab', dia: 'Sábado', num: 9, precio: 30000,
+    // video: el de cada noche (color chacra, animación nueva), sin sonido. Rutas completas: los scripts de
+    // publicación copian solo los archivos que aparecen escritos en la página.
+    { id: 'sab', dia: 'Sábado', num: 9, precio: 30000, video: ['assets/video/sabado-9x16.mp4', 'assets/video/sabado-9x16-poster.webp'],
       artistas: ['raly', 'coplanacu', 'veliz', 'planeador', 'pochi', 'escobedo', 'golpes'],
       locales: ['sachas', 'cristian', 'rodri', 'leo', 'garzamanta', 'sayago', 'masa', 'gimenez', 'leiva'],
       academias: ['Academia Juan Saavedra (invitada, Santiago capital)', 'Escuela Municipal de Folklore Félix Patricio Carol (prof. Raúl Coria)'] },
-    { id: 'dom', dia: 'Domingo', num: 10, precio: 30000,
+    { id: 'dom', dia: 'Domingo', num: 10, precio: 30000, video: ['assets/video/domingo-9x16.mp4', 'assets/video/domingo-9x16-poster.webp'],
       artistas: ['orellana', 'ternura', 'demi', 'toledo', 'acosta', 'bonys', 'ranchada', 'talentosos'],
       locales: ['saucena', 'miski', 'siete', 'greda', 'vozdelmonte', 'brujitos', 'zagales', 'chimpa', 'adrian', 'rocky'],
-      academias: ['Taller de Danza Adultos Frutos de la Danza (prof. Daniel Mansilla)', 'Grupo juvenil Félix Patricio Carol (prof. Raúl Coria)'] },
+      academias: ['Academia Frutos de la Danza – Taller de Adultos (prof. Daniel Mansilla)', 'Grupo juvenil Félix Patricio Carol (prof. Raúl Coria)'] },
   ],
   abono: { precio: 50000 },
   artistas: {
@@ -1080,11 +1086,15 @@ pintarVenta();
       return `<span class="item">${nombre}${k === f[f.length - 1] ? '' : '<span class="sep" aria-hidden="true">✦</span>'}</span>`;
     }).join('')}</div>`;
   $('#poster').innerHTML = FESTIVAL.noches.map(n => `<section class="noche-bloque" aria-label="${n.dia} ${n.num}">
+      <div class="noche-txt">
       <p class="noche-tit revelar"><span>${n.dia} ${n.num}</span> de enero</p>
       ${(FESTIVAL.poster[n.id] || []).map(fila).join('')}
       ${(n.locales || []).length ? `<p class="secund revelar"><b>Artistas locales</b><a href="#locales">${n.locales.map((k, j) =>
         `<span>${escapar(nombreLocal(k))}${j < n.locales.length - 1 ? '<i>✦</i>' : ''}</span>`).join('<wbr>')}</a></p>` : ''}
       ${(n.academias || []).length ? `<p class="acad revelar"><b>Academias</b>${n.academias.map(escapar).join('<i>✦</i>')}</p>` : ''}
+      </div>
+      ${n.video ? `<div class="telefono revelar"><video muted playsinline loop preload="none" poster="${n.video[1]}"
+        data-src="${n.video[0]}" aria-label="Video de la noche del ${n.dia.toLowerCase()} ${n.num}"></video></div>` : ''}
     </section>`).join('')
     + `<p class="toque revelar">${conMouse ? 'Pasá el mouse por un nombre para ver al artista.' : 'Tocá un nombre para ver al artista.'}</p>`
     ;
