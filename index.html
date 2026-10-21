@@ -645,7 +645,7 @@ footer{background:#04060f;padding:56px 0 calc(110px + env(safe-area-inset-bottom
         <p class="l1"><span>Raly Barrionuevo<i>✦</i></span><wbr><span>Orellana Lucca<i>✦</i></span><wbr><span>Dúo Coplanacu<i>✦</i></span><wbr><span>JLS Ternura</span></p>
         <p class="l2"><span>Demi Carabajal<i>✦</i></span><wbr><span>Marcelo Toledo<i>✦</i></span><wbr><span>Claudio Acosta</span></p>
         <p class="l2"><span>Alejandro Véliz<i>✦</i></span><wbr><span>Planeador V<i>✦</i></span><wbr><span>Franco Escobedo</span></p>
-        <p class="l2"><span>Pochi Chávez<i>✦</i></span><wbr><span>Los Golpes<i>✦</i></span><wbr><span>Los Bonys</span></p>
+        <p class="l2"><span>Pochi Chávez<i>✦</i></span><wbr><span>Los Bonys</span></p>
         <p class="l2"><span>Ricardo Sosa y La Ranchada<i>✦</i></span><wbr><span>Los Talentosos del Chamamé</span></p>
         <p class="l3"><span>Artistas locales y academias</span></p>
       </div>
@@ -871,8 +871,8 @@ const FESTIVAL = {
     // video: el de cada noche (color chacra, animación nueva), sin sonido. Rutas completas: los scripts de
     // publicación copian solo los archivos que aparecen escritos en la página.
     { id: 'sab', dia: 'Sábado', num: 9, precio: 30000, video: ['assets/video/sabado-9x16.mp4', 'assets/video/sabado-9x16-poster.webp'],
-      artistas: ['raly', 'coplanacu', 'veliz', 'planeador', 'pochi', 'escobedo', 'golpes'],
-      locales: ['sachas', 'cristian', 'rodri', 'leo', 'garzamanta', 'sayago', 'masa', 'gimenez', 'leiva'],
+      artistas: ['raly', 'coplanacu', 'veliz', 'planeador', 'pochi', 'escobedo'],
+      locales: ['sachas', 'golpes', 'cristian', 'rodri', 'leo', 'garzamanta', 'sayago', 'masa', 'gimenez', 'leiva'],
       academias: ['Academia Juan Saavedra (invitada, Santiago capital)', 'Escuela Municipal de Folklore Félix Patricio Carol (prof. Raúl Coria)'] },
     { id: 'dom', dia: 'Domingo', num: 10, precio: 30000, video: ['assets/video/domingo-9x16.mp4', 'assets/video/domingo-9x16-poster.webp'],
       artistas: ['orellana', 'ternura', 'demi', 'toledo', 'acosta', 'bonys', 'ranchada', 'talentosos'],
@@ -895,11 +895,10 @@ const FESTIVAL = {
     demi:      { nombre: 'Demi Carabajal', genero: 'Folklore', foto: true },
     ternura:   { nombre: 'JLS Ternura', genero: '', foto: true, detalle: 'José Luis Salinas' },
     talentosos: { nombre: 'Los Talentosos del Chamamé', genero: 'Chamamé', foto: true, fondo: 'Chamamé' },
-    golpes:    { nombre: 'Los Golpes', genero: '' },
   },
   // Póster por noche: filas de mayor a menor. Los secundarios y las academias salen de FESTIVAL.noches.
   poster: {
-    sab: [['raly', 'coplanacu'], ['veliz', 'planeador', 'escobedo'], ['pochi', 'golpes']],
+    sab: [['raly', 'coplanacu'], ['veliz', 'planeador', 'escobedo'], ['pochi']],
     // Domingo en tres niveles (José, 20/10): Orellana y Ternura; Demi, Toledo y Acosta; el resto.
     dom: [['orellana', 'ternura'], ['demi', 'toledo', 'acosta'], ['bonys', 'ranchada', 'talentosos']],
   },
@@ -911,6 +910,7 @@ const FESTIVAL = {
     // Secundarios en el orden de la organización: primero los del sábado, después los del domingo.
     // La foto es assets/locales/<clave>.webp (sinFoto: se muestra el logo hasta que llegue la foto).
     { clave: 'sachas', nombre: 'Las Sachaguitarras Atamisqueñas' },
+    { clave: 'golpes', nombre: 'Los Golpes' },   // locales (José, 21/10), con la foto que mandó la organización
     { clave: 'cristian', nombre: 'Cristian Heredia' },
     { clave: 'rodri', nombre: 'Rodri Salvatierra' },
     { clave: 'leo', nombre: 'Leo Lencina', detalle: 'DJ' },
@@ -919,7 +919,7 @@ const FESTIVAL = {
     { clave: 'masa', nombre: 'Masa y sus Yanasus' },
     { clave: 'gimenez', nombre: 'Los Hermanitos Giménez' },
     { clave: 'leiva', nombre: 'Germán Leiva' },
-    { clave: 'saucena', nombre: 'La Sauceña', sinFoto: true },
+    { clave: 'saucena', nombre: 'La Sauceña' },
     { clave: 'miski', nombre: 'Mishqui Simi' },
     { clave: 'siete', nombre: 'Los Siete del Chamamé' },
     { clave: 'greda', nombre: 'La Greda', detalle: 'Voz y vos' },
