@@ -703,7 +703,7 @@ footer{background:#04060f;padding:56px 0 calc(110px + env(safe-area-inset-bottom
       pagás online y el QR te llega al correo al instante.</p>
 
     <div class="boletos" id="boletos"></div>
-    <p class="servicio revelar" id="servicio">Los precios online llevan un costo de servicio. Menores: se informa con la apertura de la venta.</p>
+    <p class="servicio revelar" id="servicio">Menores: se informa con la apertura de la venta.</p>
 
     <ol class="como-compras">
       <li class="revelar"><h3>Elegís</h3><p>La noche del sábado, la del domingo o el abono para las dos.</p></li>
@@ -863,23 +863,24 @@ const FESTIVAL = {
   primeraNoche: '2027-01-09T21:00:00-03:00',
   // Cuando el sistema de venta esté andando: abierta: true y url a la compra.
   venta: { abierta: false, url: '#entradas' },
-  cargoPct: null,             // lo completa el sistema de venta: con él se muestra el precio final
+  // Los precios son FINALES, un solo número (pedido de José, 27/10): $33.000 la noche y $55.000 el abono.
+  // El costo de servicio va adentro y no se muestra aparte en ningún lado.
   estado: {},                 // disponible · pocas · agotado, por sab, dom y abono
   noches: [
     // Cartelera definitiva de la organización (19/10). artistas: principales (claves de FESTIVAL.artistas);
     // locales: secundarios (claves de FESTIVAL.locales); academias: texto.
     // video: el de cada noche (color chacra, animación nueva), sin sonido. Rutas completas: los scripts de
     // publicación copian solo los archivos que aparecen escritos en la página.
-    { id: 'sab', dia: 'Sábado', num: 9, precio: 30000, video: ['assets/video/sabado-9x16.mp4', 'assets/video/sabado-9x16-poster.webp'],
+    { id: 'sab', dia: 'Sábado', num: 9, precio: 33000, video: ['assets/video/sabado-9x16.mp4', 'assets/video/sabado-9x16-poster.webp'],
       artistas: ['raly', 'coplanacu', 'veliz', 'planeador', 'pochi', 'escobedo'],
       locales: ['sachas', 'golpes', 'cristian', 'rodri', 'leo', 'garzamanta', 'sayago', 'masa', 'gimenez', 'leiva'],
       academias: ['Academia Juan Saavedra (invitada, Santiago capital)', 'Escuela Municipal de Folklore Félix Patricio Carol (prof. Raúl Coria)'] },
-    { id: 'dom', dia: 'Domingo', num: 10, precio: 30000, video: ['assets/video/domingo-9x16.mp4', 'assets/video/domingo-9x16-poster.webp'],
+    { id: 'dom', dia: 'Domingo', num: 10, precio: 33000, video: ['assets/video/domingo-9x16.mp4', 'assets/video/domingo-9x16-poster.webp'],
       artistas: ['orellana', 'ternura', 'demi', 'toledo', 'acosta', 'bonys', 'ranchada', 'talentosos'],
       locales: ['saucena', 'miski', 'siete', 'greda', 'vozdelmonte', 'brujitos', 'zagales', 'chimpa', 'adrian', 'rocky'],
       academias: ['Academia Frutos de la Danza – Taller de Adultos (prof. Daniel Mansilla)', 'Grupo juvenil Félix Patricio Carol (prof. Raúl Coria)'] },
   ],
-  abono: { precio: 50000 },
+  abono: { precio: 55000 },
   artistas: {
     raly:      { nombre: 'Raly Barrionuevo', genero: 'Folklore', foto: true },
     orellana:  { nombre: 'Orellana Lucca', genero: 'Folklore', foto: true, detalle: 'Dúo de Manuel Orellana y Rodolfo Lucca' },
@@ -972,9 +973,7 @@ function pintarVenta() {
   }
   const textoMenores = FESTIVAL.menoresGratisHasta
     ? `Menores de ${FESTIVAL.menoresGratisHasta} años: entran gratis.` : 'Menores: se informa con la apertura de la venta.';
-  $('#servicio').textContent = abierta && FESTIVAL.cargoPct != null
-    ? `Precios finales: ya incluyen el costo de servicio (${FESTIVAL.cargoPct} %). ${textoMenores}`
-    : `Los precios online llevan un costo de servicio. ${textoMenores}`;
+  $('#servicio').textContent = textoMenores;
 }
 pintarVenta();
 
@@ -1146,10 +1145,8 @@ function pintarBoletos() {
         ? `<span class="b-locales">Artistas locales: ${n.locales.map(k => escapar(nombreLocal(k))).join(', ')}</span>` : '')
       + ((n.academias || []).length ? `<span class="b-locales">Academias: ${n.academias.map(escapar).join(', ')}</span>` : '')
     : 'Grilla de la noche: se anuncia muy pronto.';
-  const conFinal = FESTIVAL.venta.abierta && FESTIVAL.cargoPct != null;
   const precio = p => !p ? `<div class="b-precio confirmar">Precio<br>a confirmar</div>`
-    : conFinal ? `<div class="b-precio">${pesos(Math.round(p * (1 + FESTIVAL.cargoPct / 100)))}<small>precio final</small></div>`
-    : `<div class="b-precio">${pesos(p)}<small>+ costo de servicio</small></div>`;
+    : `<div class="b-precio">${pesos(p)}</div>`;
   const sello = id => !FESTIVAL.venta.abierta ? '<span class="sello" aria-hidden="true">Próximamente</span>'
     : FESTIVAL.estado[id] === 'agotado' ? '<span class="sello" aria-hidden="true">Agotado</span>' : '';
   const boton = id => !FESTIVAL.venta.abierta || FESTIVAL.estado[id] === 'agotado' ? ''
@@ -1211,8 +1208,7 @@ pintarBoletos();
 
 /* ── Preguntas frecuentes (las que dependen de un dato pendiente aparecen solas cuando se carga) ── */
 function pintarPreguntas() {
-  const abono = !FESTIVAL.abono.precio ? '' : FESTIVAL.venta.abierta && FESTIVAL.cargoPct != null
-    ? ` por ${pesos(Math.round(FESTIVAL.abono.precio * (1 + FESTIVAL.cargoPct / 100)))} final` : ` por ${pesos(FESTIVAL.abono.precio)} más el costo de servicio`;
+  const abono = !FESTIVAL.abono.precio ? '' : ` por ${pesos(FESTIVAL.abono.precio)}`;
   const lista = [
     ['¿Cuándo salen a la venta las entradas?', FESTIVAL.venta.abierta
       ? 'Ya están a la venta, acá mismo. Elegís la noche o el abono, pagás online y el QR te llega al correo.'
@@ -1239,9 +1235,8 @@ pintarPreguntas();
     fetch('/api/visita', { method: 'POST' }).catch(() => {});
     if (!cfg.ventaAbierta) return;
     FESTIVAL.venta = { abierta: true, url: '/comprar' };
-    FESTIVAL.cargoPct = cfg.cargoPct;
-    FESTIVAL.noches.forEach(n => { if (cfg.tipos[n.id]) n.precio = cfg.tipos[n.id].precio; });
-    if (cfg.tipos.abono) FESTIVAL.abono.precio = cfg.tipos.abono.precio;
+    FESTIVAL.noches.forEach(n => { if (cfg.tipos[n.id]) n.precio = cfg.tipos[n.id].final; });
+    if (cfg.tipos.abono) FESTIVAL.abono.precio = cfg.tipos.abono.final;
     FESTIVAL.estado = Object.fromEntries(Object.entries(cfg.tipos).map(([k, t]) => [k, t.estado]));
     pintarVenta(); pintarBoletos(); pintarPreguntas();
     $$('#boletos .revelar, #preguntas-lista .revelar').forEach(e => e.classList.add('visible'));
